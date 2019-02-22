@@ -7,6 +7,7 @@ library(stargazer)
 library(magrittr)
 library(dplyr)
 library(lfe)
+library(zoo)
 
 
 # Download data and unzip the data
@@ -36,22 +37,37 @@ df %<>%
 df <- df %>%
         mutate(born_q1 = if_else(quarter_born ==1, TRUE, FALSE),
                born_first_half = if_else(quarter_born ==1 | quarter_born ==2, TRUE, FALSE),
-                age_quarters = (80 - year_born)*4 + quarter_born - 1
+                age_quarters = (80 - year_born -1 )*4 + quarter_born
                )
 
 # plots
-ggplot(df, aes(x = education, y = log_wage)) +
-    geom_point(alpha = 0.2) +
-    geom_smooth(method='lm') +
+df2 <- df %>%
+        mutate(year_born = year_born + 1900,
+               birth_cohort = as.yearqtr(paste(year_born, quarter_born), "%Y %q"))
+
+group_stats <- df2 %>%
+        group_by(birth_cohort) %>%
+        summarize(
+            education = mean(education, na.rm = TRUE),
+            log_wage  = mean(log_wage, na.rm = TRUE) 
+        )
+
+ggplot(group_stats, aes(x = birth_cohort, y = education)) +
+    geom_line(color = "dodger blue") +
+    geom_point(color = "blue") + 
+    ylim(12.0, 13.3) +
+    scale_y_continuous(breaks = round(seq(12.1, 13.3, by = 0.1),1)) +
+    scale_x_continuous(breaks = round(seq(1930, 1940, by = 1),1)) +
     theme_bw()
 
-ggplot(df, aes(x = education)) +
-    geom_histogram() +
+ggplot(group_stats, aes(x = birth_cohort, y = log_wage)) +
+    geom_line(color = "dodger blue") +
+    geom_point(color = "blue") + 
+    scale_y_continuous(breaks = seq(5.85, 5.95, by = 0.1)) +
+    ylim(5.86, 5.94) +
+    scale_x_continuous(breaks = round(seq(1930, 1940, by = 1),1)) +
     theme_bw()
 
-ggplot(df, aes(x = log_wage)) +
-    geom_histogram() +
-    theme_bw()
 
 # models
 # Column 1: OLS
