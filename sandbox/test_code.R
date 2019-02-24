@@ -8,6 +8,7 @@ library(magrittr)
 library(dplyr)
 library(lfe)
 library(zoo)
+library(lubridate)
 
 
 # Download data and unzip the data
@@ -49,24 +50,41 @@ group_stats <- df2 %>%
         group_by(birth_cohort) %>%
         summarize(
             education = mean(education, na.rm = TRUE),
-            log_wage  = mean(log_wage, na.rm = TRUE) 
-        )
+            log_wage  = mean(log_wage, na.rm = TRUE),
+            qob = median(quarter(birth_cohort))
+        ) %>%
+        mutate(first_quarter = qob ==1)
 
 ggplot(group_stats, aes(x = birth_cohort, y = education)) +
     geom_line(color = "dodger blue") +
-    geom_point(color = "blue") + 
+    geom_point(aes(shape = first_quarter), color = "blue", size = 3) + 
+    geom_text(aes(label=qob),hjust=0, vjust=-1) +
     ylim(12.0, 13.3) +
     scale_y_continuous(breaks = round(seq(12.1, 13.3, by = 0.1),1)) +
     scale_x_continuous(breaks = round(seq(1930, 1940, by = 1),1)) +
-    theme_bw()
+    #scale_shape_discrete(solid=F, legend=F) +
+    #scale_fill_manual(values=c("white")) +
+    xlab("Year of Birth") + 
+    ylab("Years of Education") + 
+    ggtitle("Average Education by Quarter of Birth") + 
+    theme_bw() + 
+    theme(legend.position = "none",
+          plot.title = element_text(hjust = 0.5))
 
 ggplot(group_stats, aes(x = birth_cohort, y = log_wage)) +
     geom_line(color = "dodger blue") +
-    geom_point(color = "blue") + 
+    geom_point(aes(shape = first_quarter), color = "blue", size = 3) + 
+    geom_text(aes(label=qob),hjust=0, vjust=-1) +
     scale_y_continuous(breaks = seq(5.85, 5.95, by = 0.1)) +
     ylim(5.86, 5.94) +
     scale_x_continuous(breaks = round(seq(1930, 1940, by = 1),1)) +
-    theme_bw()
+    xlab("Year of Birth") + 
+    ylab("Log Weekly Earnings") + 
+    ggtitle("Average Log Weekly Wage by Quarter of Birth") + 
+    theme_bw() + 
+    theme(legend.position = "none",
+          plot.title = element_text(hjust = 0.5))
+    
 
 
 # models
@@ -97,10 +115,16 @@ col7 <- felm(log_wage ~ 1 | year_born + state_born |
 col8 <- felm(log_wage ~ age_quarters + I(age_quarters^2) | year_born + state_born | 
                  (education ~ factor(quarter_born) * factor(year_born)), 
              data = df) 
-     
+
+rownames(col8$beta)[rownames(col8$beta) == "`education(fit)`"] <- "education"
+rownames(col8$coefficients)[rownames(col8$coefficients) == "`education(fit)`"] <- "education"
+names(col8$se)[names(col8$se) == "`education(fit)`"] <- "education"
+
+
 stargazer(col1, col2, col3, col4, col8,
           type = "text",
           keep = "education",
-          covariate.labels = c('Years of education', 'Years of education'))
+          covariate.labels = c('Years of education'))
 
 summary(col8)
+
