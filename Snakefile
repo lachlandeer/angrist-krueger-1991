@@ -16,6 +16,25 @@ print(FIGS)
 
 # --- Build Rules --- #
 
+rule all:
+    input:
+        figures = expand(config["out_figures"] + "{iFigure}.pdf",
+                        iFigure = FIGS)
+
+rule create_figure:
+    input:
+        script = config["src_figures"] + "{iFigure}.R",
+        data   = config["out_data"] + "cohort_summary.csv",
+    output:
+        pdf = config["out_figures"] + "{iFigure}.pdf",
+    log:
+        config["log"] + "figures/{iFigure}.Rout"
+    shell:
+        "Rscript {input.script} \
+            --data {input.data} \
+            --out {output.pdf} \
+            > {log} 2>&1"
+
 rule gen_cohort_sum:
     input:
         script = config["src_data_mgt"] + "cohort_summary.R",
