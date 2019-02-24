@@ -12,13 +12,15 @@ configfile: "config.yaml"
 # --- Dictionaries --- #
 
 FIGS = glob_wildcards(config["src_figures"] + "{iFile}.R").iFile
-print(FIGS)
+FIXED_EFFECTS = ["fixed_effects", "no_fixed_effects"]
 
 # --- Build Rules --- #
 
 rule all:
     input:
-        paper = config["out_paper"] + "paper.pdf"
+        paper = config["out_paper"] + "paper.pdf",
+        ols_results = expand(config["out_analysis"] + "ols_{iFixedEffect}.Rds",
+                        iFixedEffect = FIXED_EFFECTS)
     output:
         paper = Path("pp4rs_assignment.pdf")
     shell:
@@ -38,6 +40,24 @@ rule paper:
         config["log"] + "paper/paper.Rout"
     shell:
         "Rscript {input.runner} {input.paper} {output.pdf} \
+            > {log} 2>&1"
+
+rule run_ols:
+    input:
+        script   = config["src_analysis"] + "estimate_ols.R",
+        data     = config["out_data"] + "angrist_krueger.csv",
+        equation = config["src_model_specs"] + "estimating_equation.json",
+        fe       = config["src_model_specs"] + "{iFixedEffect}.json",
+    output:
+        config["out_analysis"] + "ols_{iFixedEffect}.Rds"
+    log:
+        config["log"] + "analysis/ols_{iFixedEffect}.Rout"
+    shell:
+        "Rscript {input.script} \
+            --data {input.data} \
+            --model {input.equation} \
+            --fixedEffects {input.fe} \
+            --out {output} \
             > {log} 2>&1"
 
 rule create_figure:
