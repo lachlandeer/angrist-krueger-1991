@@ -11,6 +11,9 @@ configfile: "config.yaml"
 
 # --- Dictionaries --- #
 
+FIGS = glob_wildcards(config["src_figures"] + "{iFile}.R").iFile
+print(FIGS)
+
 # --- Build Rules --- #
 
 rule gen_cohort_sum:
@@ -26,7 +29,6 @@ rule gen_cohort_sum:
             --data {input.data} \
             --out {output.data} \
             > {log} 2>&1"
-
 
 rule gen_reg_vars:
     input:
