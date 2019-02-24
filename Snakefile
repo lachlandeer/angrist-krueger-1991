@@ -59,7 +59,7 @@ rule make_table:
         iv_fe = expand(config["out_analysis"] + "iv_{iInstrument}_fe.Rds",
                         iInstrument = INST),
     output:
-        table = config["out_tables"] + "regression_table.tex",
+        table = Path(config["out_tables"] + "regression_table.tex"),
     params:
         directory = "out/analysis"
     log:
@@ -83,7 +83,7 @@ rule run_iv_fe:
         fe       = config["src_model_specs"] + "fixed_effects.json",
         instr    = config["src_model_specs"] + "instrument_{iInstrument}.json",
     output:
-        config["out_analysis"] + "iv_{iInstrument}_fe.Rds"
+        Path(config["out_analysis"] + "iv_{iInstrument}_fe.Rds")
     log:
         config["log"] + "analysis/iv_{iInstrument}_fe.Rout"
     shell:
@@ -103,7 +103,7 @@ rule run_iv_nofe:
         fe       = config["src_model_specs"] + "no_fixed_effects.json",
         instr    = config["src_model_specs"] + "instrument_1.json",
     output:
-        config["out_analysis"] + "iv_no_fe.Rds"
+        Path(config["out_analysis"] + "iv_no_fe.Rds")
     log:
         config["log"] + "analysis/iv_no_fe.Rout"
     shell:
@@ -122,7 +122,7 @@ rule run_ols:
         equation = config["src_model_specs"] + "estimating_equation.json",
         fe       = config["src_model_specs"] + "{iFixedEffect}.json",
     output:
-        config["out_analysis"] + "ols_{iFixedEffect}.Rds"
+        Path(config["out_analysis"] + "ols_{iFixedEffect}.Rds")
     log:
         config["log"] + "analysis/ols_{iFixedEffect}.Rout"
     shell:
