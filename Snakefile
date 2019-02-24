@@ -56,9 +56,9 @@ rule make_table:
         script = config["src_tables"] + "regression_table.R",
         ols_results = expand(config["out_analysis"] + "ols_{iFixedEffect}.Rds",
                         iFixedEffect = FIXED_EFFECTS),
-        iv_no_fe = config["out_analysis"] + "iv_no_fe.Rds",
-        iv_fe = expand(config["out_analysis"] + "iv_{iInstrument}_fe.Rds",
-                        iInstrument = INST),
+        iv_fe = expand(config["out_analysis"] + "iv_{iInstrument}.{iFixedEffect}.Rds",
+                        iInstrument = INST,
+                        iFixedEffect = FIXED_EFFECTS),
     output:
         table = Path(config["out_tables"] + "regression_table.tex"),
     params:
@@ -82,33 +82,12 @@ rule run_iv_fe:
         script   = config["src_analysis"] + "estimate_iv.R",
         data     = config["out_data"] + "angrist_krueger.csv",
         equation = config["src_model_specs"] + "estimating_equation.json",
-        fe       = config["src_model_specs"] + "fixed_effects.json",
+        fe       = config["src_model_specs"] + "{iFixedEffect}.json",
         instr    = config["src_model_specs"] + "instrument_{iInstrument}.json",
     output:
-        Path(config["out_analysis"] + "iv_{iInstrument}_fe.Rds")
+        Path(config["out_analysis"] + "iv_{iInstrument}.{iFixedEffect}.Rds")
     log:
-        config["log"] + "analysis/iv_{iInstrument}_fe.Rout"
-    shell:
-        "Rscript {input.script} \
-            --data {input.data} \
-            --model {input.equation} \
-            --fixedEffects {input.fe} \
-            --instruments {input.instr} \
-            --out {output} \
-            > {log} 2>&1"
-
-## run_iv_nofe        : run IV regressions without FE
-rule run_iv_nofe:
-    input:
-        script   = config["src_analysis"] + "estimate_iv.R",
-        data     = config["out_data"] + "angrist_krueger.csv",
-        equation = config["src_model_specs"] + "estimating_equation.json",
-        fe       = config["src_model_specs"] + "no_fixed_effects.json",
-        instr    = config["src_model_specs"] + "instrument_1.json",
-    output:
-        Path(config["out_analysis"] + "iv_no_fe.Rds")
-    log:
-        config["log"] + "analysis/iv_no_fe.Rout"
+        config["log"] + "analysis/iv_{iInstrument}.{iFixedEffect}.Rout"
     shell:
         "Rscript {input.script} \
             --data {input.data} \

@@ -7,7 +7,6 @@
  paper              : builds Rmd to pdf
  make_table         : construct regression table
  run_iv_fe          : estimate IV regression equations that have Fixed Effects
- run_iv_nofe        : run IV regressions without FE
  create_figure      : constructs summary figures
  gen_cohort_sum     : compute summary stats by cohort
  gen_reg_vars       : creates missing variables needed for regression
