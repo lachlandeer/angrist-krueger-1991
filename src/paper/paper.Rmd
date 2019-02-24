@@ -19,7 +19,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## Summary Plots
 
-```{r fig-sub, echo = FALSE, fig.cap = 'Graphical depiction of first stage and reduced form for IV estimates of the economic return to schooling using quarter of birth', fig.subcap = c('Subcaption1', 'Subcaption2'), fig.show = "hold", out.width = '.60\\linewidth', fig.asp = 1, fig.ncol = 1}
+```{r fig-sub, fig.align="center", echo = FALSE, fig.cap = 'Graphical depiction of first stage and reduced form for IV estimates of the economic return to schooling using quarter of birth', fig.subcap = c('Subcaption1', 'Subcaption2'), fig.show = "hold", out.width = '.60\\linewidth', fig.asp = 1, fig.ncol = 1}
 knitr::include_graphics( c("../../out/figures/education_by_cohort.pdf",
                             "../../out/figures/earnings_by_cohort.pdf"))
 ```
