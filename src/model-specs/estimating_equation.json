@@ -1,4 +1,4 @@
 {
-    "DEPVAR": "log_wages",
+    "DEPVAR": "log_wage",
     "TREATMENT": "education"
 }
