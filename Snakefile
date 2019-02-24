@@ -20,6 +20,8 @@ rule all:
     input:
         figures = expand(config["out_figures"] + "{iFigure}.pdf",
                         iFigure = FIGS)
+    shell:
+        "rm Rplots.pdf"
 
 rule create_figure:
     input:
