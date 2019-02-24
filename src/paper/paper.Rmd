@@ -1,5 +1,6 @@
 ---
-title: "pp4rs assignment example"
+title: "Replication of Angrist and Krueger (1991)"
+subtitle: "Table 4.1.1 from Mostly Harmless Econometrics"
 author: '@lachlandeer'
 date: "February 24, 2019"
 header-includes:
