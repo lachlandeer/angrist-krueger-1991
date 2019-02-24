@@ -5,3 +5,7 @@
 *.Rproj
 sandbox/*.txt
 sandbox/*.zip
+logs/*
+out/*
+src/data/*
+.snakemake
