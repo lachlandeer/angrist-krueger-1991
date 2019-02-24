@@ -33,6 +33,8 @@ snakemake all
 
 into a your terminal and press `RETURN`
 
+See [`HELP.txt`](HELP.txt) for explanation of what the Snakemake Rules are doing.
+
 ## Install instructions
 
 ### Installing `R`
