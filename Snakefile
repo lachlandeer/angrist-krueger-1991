@@ -202,7 +202,7 @@ rule download_data:
 ## clean              : removes all content from out/ directory
 rule clean:
     shell:
-        "rm -rf out/*"
+        "rm -rf out/* *.pdf"
 
 # --- Help Rules --- #
 ## help               : prints help comments for Snakefile
