@@ -12,6 +12,7 @@ configfile: "config.yaml"
 # --- Dictionaries --- #
 
 FIGS = glob_wildcards(config["src_figures"] + "{iFile}.R").iFile
+INST = glob_wildcards(config["src_model_specs"] + "instrument_{iInst}.json").iInst
 FIXED_EFFECTS = ["fixed_effects", "no_fixed_effects"]
 
 # --- Build Rules --- #
@@ -19,9 +20,6 @@ FIXED_EFFECTS = ["fixed_effects", "no_fixed_effects"]
 rule all:
     input:
         paper = config["out_paper"] + "paper.pdf",
-        ols_results = expand(config["out_analysis"] + "ols_{iFixedEffect}.Rds",
-                        iFixedEffect = FIXED_EFFECTS),
-        iv_no_fe = config["out_analysis"] + "iv_no_fe.Rds"
     output:
         paper = Path("pp4rs_assignment.pdf")
     shell:
@@ -35,12 +33,37 @@ rule paper:
         runner = config["src_lib"] + "knit_rmd.R",
         figures = expand(config["out_figures"] + "{iFigure}.pdf",
                         iFigure = FIGS),
+        ols_results = expand(config["out_analysis"] + "ols_{iFixedEffect}.Rds",
+                        iFixedEffect = FIXED_EFFECTS),
+        iv_no_fe = config["out_analysis"] + "iv_no_fe.Rds",
+        iv_fe = expand(config["out_analysis"] + "iv_{iInstrument}_fe.Rds",
+                        iInstrument = INST)
     output:
         pdf = Path(config["out_paper"] + "paper.pdf")
     log:
         config["log"] + "paper/paper.Rout"
     shell:
         "Rscript {input.runner} {input.paper} {output.pdf} \
+            > {log} 2>&1"
+
+rule run_iv_fe:
+    input:
+        script   = config["src_analysis"] + "estimate_iv.R",
+        data     = config["out_data"] + "angrist_krueger.csv",
+        equation = config["src_model_specs"] + "estimating_equation.json",
+        fe       = config["src_model_specs"] + "fixed_effects.json",
+        instr    = config["src_model_specs"] + "instrument_{iInstrument}.json",
+    output:
+        config["out_analysis"] + "iv_{iInstrument}_fe.Rds"
+    log:
+        config["log"] + "analysis/iv_{iInstrument}_fe.Rout"
+    shell:
+        "Rscript {input.script} \
+            --data {input.data} \
+            --model {input.equation} \
+            --fixedEffects {input.fe} \
+            --instruments {input.instr} \
+            --out {output} \
             > {log} 2>&1"
 
 rule run_iv_nofe:
