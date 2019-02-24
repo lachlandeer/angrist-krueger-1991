@@ -48,27 +48,33 @@ data <- file_list %>%
             setNames(model_names)
 
 # Create Table
-stargazer(data$ols_no_fixed_effects,
-          data$ols_fixed_effects,
-          data$iv_no_fe,
-          data$iv_1_fe,
-          data$iv_2_fe,
-          data$iv_3_fe,
-          data$iv_4_fe,
+stargazer(data$ols_no_fixed_effects, #1
+          data$ols_fixed_effects, #2
+          data$iv_1.no_fixed_effects, #3
+          data$iv_2.no_fixed_effects, #4
+          data$iv_1.fixed_effects, #5
+          data$iv_3.fixed_effects, #6
+          data$iv_4.fixed_effects, #7
           initial.zero = TRUE,
           align = FALSE,
           title = "Estimates of the Return to Schooling",
-          dep.var.caption    = "Log Weekly Earnings",
-          dep.var.labels.include = FALSE,
-        #   add.lines = list(
-        #       c("Restricted Model", "No", "No", "No", "Yes", "Yes", "Yes")
-        #   ),
+          covariate.labels = c("Years of Education"),
+          #dep.var.caption    = "Log Weekly Earnings",
+          #dep.var.labels.include = FALSE,
+          add.lines = list(c("Year of Birth FE", "No", "Yes", "No", "No", "Yes", "Yes", "Yes"),
+                           c("Place of Birth FE", "No", "Yes", "No", "No", "Yes", "Yes", "Yes"),
+                           c("Instruments", "", "", "QOB = 1", "QOB = 1 or 2", "QOB = 1", "QOB FE", "QOB * YOB FE")
+                           ),
+          omit = c("Constant"),
           omit.stat = c("rsq", "ser", "F"),
+          notes        = "Sometimes you just have to start over.",
+          notes.append = FALSE,
+          notes.align = "l",
           df = FALSE,
           digits = 3,
           font.size = "scriptsize",
           style = "apsr",
-          table.layout ="=ldc-#-t-o-a-s=n",
+          table.layout ="=lc-#-t-a-s=n",
           no.space = TRUE,
           type = "latex",
           out = opt$out
