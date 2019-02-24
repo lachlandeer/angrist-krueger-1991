@@ -1,4 +1,5 @@
 ## Workflow - Replicate MHE Table 4.1.1
+##            and Figure 4.1.1
 ##
 ## authors: @lachlandeer
 ##
