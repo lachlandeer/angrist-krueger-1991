@@ -198,6 +198,12 @@ rule download_data:
             --dest {output.data} \
             > {log} 2>&1"
 
+# --- R package resolution --- #
+
+rule find_packages:
+    shell:
+        "bash find_r_packages.sh"
+
 # --- Clean Rules --- #
 ## clean              : removes all content from out/ directory
 rule clean:

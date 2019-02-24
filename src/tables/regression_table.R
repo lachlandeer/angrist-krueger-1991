@@ -11,6 +11,7 @@ library(rlist)
 library(magrittr)
 library(purrr)
 library(stargazer)
+library(tools)
 
 # CLI parsing
 option_list = list(
