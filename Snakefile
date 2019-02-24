@@ -204,6 +204,13 @@ rule find_packages:
     shell:
         "bash find_r_packages.sh"
 
+rule install_packages:
+    input:
+        script = config["src_lib"] + "install_r_packages.R",
+        requirements = "REQUIREMENTS.txt"
+    shell:
+        "Rscript {input.script}"
+
 # --- Clean Rules --- #
 ## clean              : removes all content from out/ directory
 rule clean:
