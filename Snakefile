@@ -25,6 +25,10 @@ rule all:
     shell:
         "rm -f Rplots.pdf && cp {input.paper} {output.paper}"
 
+#
+# Builds Paper
+#
+
 ## paper: builds Rmd to pdf
 # Note: this uses a simpler command line parsing strategy
 rule paper:
@@ -45,6 +49,14 @@ rule paper:
     shell:
         "Rscript {input.runner} {input.paper} {output.pdf} \
             > {log} 2>&1"
+
+#
+# Construct Estimates Table
+#
+
+#
+# Estimation Rules
+#
 
 rule run_iv_fe:
     input:
@@ -104,6 +116,10 @@ rule run_ols:
             --out {output} \
             > {log} 2>&1"
 
+#
+# create figures
+#
+
 rule create_figure:
     input:
         script = config["src_figures"] + "{iFigure}.R",
@@ -117,6 +133,10 @@ rule create_figure:
             --data {input.data} \
             --out {output.pdf} \
             > {log} 2>&1"
+
+#
+# data management rules
+#
 
 rule gen_cohort_sum:
     input:
