@@ -10,7 +10,7 @@ library(optparse)
 library(rjson)
 library(readr)
 library(rlist)
-library(felm)
+library(lfe)
 
 # CLI parsing
 option_list = list(
@@ -61,13 +61,13 @@ print("Loading Regression Model")
 model_structure <- fromJSON(file = opt$model)
 
 # Load Fixed Effects
-print("Loading Subsetting Condition")
+print("Loading Fixed Effect Specification")
 fe <- fromJSON(file = opt$fixedEffects)
 
 # Filter data
 # Construct Formula
 dep_var <- model_structure$DEPVAR
-exog    <- model_structure$EXOG
+exog    <- model_structure$TREATMENT
 fixed_effects <- fe$FIXED_EFFECTS
 
 reg_formula <- as.formula(paste(dep_var,
@@ -80,7 +80,7 @@ reg_formula <- as.formula(paste(dep_var,
 print(reg_formula)
 
 # Run Regression
-ols_model <- felm(reg_formula, reg_data)
+ols_model <- felm(reg_formula, df)
 summary(ols_model)
 
 # Save output
