@@ -87,7 +87,7 @@ instruments   <- iv$INST
 first_stage <- paste0("(",
                         endog,
                         "~",
-                        "instruments",
+                        instruments,
                         ")"
                         )
 print("first stage regression:")
@@ -110,4 +110,10 @@ model <- felm(reg_formula, df)
 summary(model)
 
 # Save output
+## Here is some formatting so we can nicely get coefficient table later
+rownames(model$beta)[rownames(model$beta) == "`education(fit)`"] <- "education"
+rownames(model$coefficients)[rownames(model$coefficients) == "`education(fit)`"] <- "education"
+names(model$se)[names(model$se) == "`education(fit)`"] <- "education"
+
+## Now save
 list.save(model, opt$out)
