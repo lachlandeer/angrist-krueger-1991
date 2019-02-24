@@ -18,8 +18,6 @@ print(FIGS)
 
 rule all:
     input:
-        figures = expand(config["out_figures"] + "{iFigure}.pdf",
-                        iFigure = FIGS),
         paper = config["out_paper"] + "paper.pdf"
     output:
         paper = Path("pp4rs_assignment.pdf")
@@ -32,6 +30,8 @@ rule paper:
     input:
         paper = config["src_paper"] + "paper.Rmd",
         runner = config["src_lib"] + "knit_rmd.R",
+        figures = expand(config["out_figures"] + "{iFigure}.pdf",
+                        iFigure = FIGS),
     output:
         pdf = Path(config["out_paper"] + "paper.pdf")
     log:
