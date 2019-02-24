@@ -13,11 +13,25 @@ configfile: "config.yaml"
 
 # --- Build Rules --- #
 
+rule gen_reg_vars:
+    input:
+        script      = config["src_data_mgt"] + "gen_reg_vars.R",
+        zip_archive = config["src_data"] + "angrist_krueger_1991.zip"
+    output:
+        data = Path(config["out_data"] + "angrist_krueger.csv")
+    log:
+        config["log"] + "data-mgt/gen_reg_vars.Rout"
+    shell:
+        "Rscript {input.script} \
+            --data {input.zip_archive} \
+            --out {output.data} \
+            > {log} 2>&1"
+
 rule download_data:
     input:
         script = config["src_data_mgt"] + "download_data.R",
     output:
-        data = config["src_data"] + "angrist_krueger_1991.zip",
+        data = Path(config["src_data"] + "angrist_krueger_1991.zip"),
     params:
         url = "http://economics.mit.edu/files/397",
     log:
