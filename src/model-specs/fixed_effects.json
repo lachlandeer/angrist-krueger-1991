@@ -1,0 +1,3 @@
+{
+    "FIXED_EFFECTS": "year_born + state_born"
+}
