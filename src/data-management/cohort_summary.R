@@ -54,4 +54,4 @@ group_stats <- df %>%
 
 # Save data
 print("saving output")
-write_csv(df, opt$out)
+write_csv(group_stats, opt$out)
