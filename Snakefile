@@ -13,6 +13,21 @@ configfile: "config.yaml"
 
 # --- Build Rules --- #
 
+rule gen_cohort_sum:
+    input:
+        script = config["src_data_mgt"] + "cohort_summary.R",
+        data   = config["out_data"] + "angrist_krueger.csv",
+    output:
+        data = config["out_data"] + "cohort_summary.csv",
+    log:
+        config["log"] + "data-mgt/cohort_summary.Rout"
+    shell:
+        "Rscript {input.script} \
+            --data {input.data} \
+            --out {output.data} \
+            > {log} 2>&1"
+
+
 rule gen_reg_vars:
     input:
         script      = config["src_data_mgt"] + "gen_reg_vars.R",
