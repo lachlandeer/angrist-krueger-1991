@@ -28,7 +28,7 @@ rule create_figure:
         script = config["src_figures"] + "{iFigure}.R",
         data   = config["out_data"] + "cohort_summary.csv",
     output:
-        pdf = config["out_figures"] + "{iFigure}.pdf",
+        pdf = Path(config["out_figures"] + "{iFigure}.pdf"),
     log:
         config["log"] + "figures/{iFigure}.Rout"
     shell:
@@ -42,7 +42,7 @@ rule gen_cohort_sum:
         script = config["src_data_mgt"] + "cohort_summary.R",
         data   = config["out_data"] + "angrist_krueger.csv",
     output:
-        data = config["out_data"] + "cohort_summary.csv",
+        data = Path(config["out_data"] + "cohort_summary.csv"),
     log:
         config["log"] + "data-mgt/cohort_summary.Rout"
     shell:
