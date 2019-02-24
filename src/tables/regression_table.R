@@ -55,6 +55,14 @@ stargazer(data$ols_no_fixed_effects, #1
           data$iv_1.fixed_effects, #5
           data$iv_3.fixed_effects, #6
           data$iv_4.fixed_effects, #7
+          se = list(data$ols_no_fixed_effects$rse, #1
+                    data$ols_fixed_effects$rse, #2
+                    data$iv_1.no_fixed_effects$rse, #3
+                    data$iv_2.no_fixed_effects$rse, #4
+                    data$iv_1.fixed_effects$rse, #5
+                    data$iv_3.fixed_effects$rse, #6
+                    data$iv_4.fixed_effects$rse #7
+                    ),
           initial.zero = TRUE,
           align = FALSE,
           title = "Estimates of the Return to Schooling",
@@ -63,7 +71,7 @@ stargazer(data$ols_no_fixed_effects, #1
           #dep.var.labels.include = FALSE,
           add.lines = list(c("Year of Birth FE", "No", "Yes", "No", "No", "Yes", "Yes", "Yes"),
                            c("Place of Birth FE", "No", "Yes", "No", "No", "Yes", "Yes", "Yes"),
-                           c("Instruments", "", "", "QOB = 1", "QOB = 1 or 2", "QOB = 1", "QOB FE", "QOB * YOB FE")
+                           c("Instruments", "", "", "QOB = 1", "QOB = 1 or 2", "QOB = 1", "QOB FE", "QOB $\\times$ YOB FE")
                            ),
           omit = c("Constant"),
           omit.stat = c("rsq", "ser", "F"),

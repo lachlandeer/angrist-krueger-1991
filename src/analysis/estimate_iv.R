@@ -114,6 +114,8 @@ summary(model)
 rownames(model$beta)[rownames(model$beta) == "`education(fit)`"] <- "education"
 rownames(model$coefficients)[rownames(model$coefficients) == "`education(fit)`"] <- "education"
 names(model$se)[names(model$se) == "`education(fit)`"] <- "education"
+names(col8$rse)[names(col8$rse) == "`education(fit)`"] <- "education"
+
 
 ## Now save
 list.save(model, opt$out)
