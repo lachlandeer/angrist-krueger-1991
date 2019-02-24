@@ -19,9 +19,26 @@ print(FIGS)
 rule all:
     input:
         figures = expand(config["out_figures"] + "{iFigure}.pdf",
-                        iFigure = FIGS)
+                        iFigure = FIGS),
+        paper = config["out_paper"] + "paper.pdf"
+    output:
+        paper = Path("pp4rs_assignment.pdf")
     shell:
-        "rm Rplots.pdf"
+        "rm -f Rplots.pdf && cp {input.paper} {output.paper}"
+
+## paper: builds Rmd to pdf
+# Note: this uses a simpler command line parsing strategy
+rule paper:
+    input:
+        paper = config["src_paper"] + "paper.Rmd",
+        runner = config["src_lib"] + "knit_rmd.R",
+    output:
+        pdf = Path(config["out_paper"] + "paper.pdf")
+    log:
+        config["log"] + "paper/paper.Rout"
+    shell:
+        "Rscript {input.runner} {input.paper} {output.pdf} \
+            > {log} 2>&1"
 
 rule create_figure:
     input:
