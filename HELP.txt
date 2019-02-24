@@ -1,0 +1,18 @@
+ Workflow - Replicate MHE Table 4.1.1
+            and Figure 4.1.1
+
+ authors: @lachlandeer
+
+ all                : moves pdf to root, builds project if missing dependency
+ paper              : builds Rmd to pdf
+ make_table         : construct regression table
+ run_iv_fe          : estimate IV regression equations that have Fixed Effects
+ run_iv_nofe        : run IV regressions without FE
+ create_figure      : constructs summary figures
+ gen_cohort_sum     : compute summary stats by cohort
+ gen_reg_vars       : creates missing variables needed for regression
+ download_data      : downloads AK1991 data from web
+ find_packages      : looks for R packages used across all scripts
+ install_packages   : installs missing R packages
+ clean              : removes all content from out/ directory
+ help               : prints help comments for Snakefile

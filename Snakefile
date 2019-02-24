@@ -17,7 +17,7 @@ INST = glob_wildcards(config["src_model_specs"] + "instrument_{iInst}.json").iIn
 FIXED_EFFECTS = ["fixed_effects", "no_fixed_effects"]
 
 # --- Build Rules --- #
-
+## all                : moves pdf to root, builds project if missing dependency
 rule all:
     input:
         paper = config["out_paper"] + "paper.pdf",
@@ -30,7 +30,7 @@ rule all:
 # Builds Paper
 #
 
-## paper: builds Rmd to pdf
+## paper              : builds Rmd to pdf
 # Note: this uses a simpler command line parsing strategy
 rule paper:
     input:
@@ -50,7 +50,7 @@ rule paper:
 #
 # Construct Estimates Table
 #
-
+## make_table         : construct regression table
 rule make_table:
     input:
         script = config["src_tables"] + "regression_table.R",
@@ -76,6 +76,7 @@ rule make_table:
 # Estimation Rules
 #
 
+## run_iv_fe          : estimate IV regression equations that have Fixed Effects
 rule run_iv_fe:
     input:
         script   = config["src_analysis"] + "estimate_iv.R",
@@ -96,6 +97,7 @@ rule run_iv_fe:
             --out {output} \
             > {log} 2>&1"
 
+## run_iv_nofe        : run IV regressions without FE
 rule run_iv_nofe:
     input:
         script   = config["src_analysis"] + "estimate_iv.R",
@@ -116,6 +118,7 @@ rule run_iv_nofe:
             --out {output} \
             > {log} 2>&1"
 
+# run_ols             : run OLS models
 rule run_ols:
     input:
         script   = config["src_analysis"] + "estimate_ols.R",
@@ -137,7 +140,7 @@ rule run_ols:
 #
 # create figures
 #
-
+## create_figure      : constructs summary figures
 rule create_figure:
     input:
         script = config["src_figures"] + "{iFigure}.R",
@@ -156,6 +159,7 @@ rule create_figure:
 # data management rules
 #
 
+## gen_cohort_sum     : compute summary stats by cohort
 rule gen_cohort_sum:
     input:
         script = config["src_data_mgt"] + "cohort_summary.R",
@@ -170,6 +174,7 @@ rule gen_cohort_sum:
             --out {output.data} \
             > {log} 2>&1"
 
+## gen_reg_vars       : creates missing variables needed for regression
 rule gen_reg_vars:
     input:
         script      = config["src_data_mgt"] + "gen_reg_vars.R",
@@ -184,6 +189,7 @@ rule gen_reg_vars:
             --out {output.data} \
             > {log} 2>&1"
 
+## download_data      : downloads AK1991 data from web
 rule download_data:
     input:
         script = config["src_data_mgt"] + "download_data.R",
@@ -201,10 +207,14 @@ rule download_data:
 
 # --- R package resolution --- #
 
+## find_packages      : looks for R packages used across all scripts
 rule find_packages:
+    output:
+        "REQUIREMENTS.txt"
     shell:
         "bash find_r_packages.sh"
 
+## install_packages   : installs missing R packages
 rule install_packages:
     input:
         script = config["src_lib"] + "install_r_packages.R",
