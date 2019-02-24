@@ -75,6 +75,7 @@ stargazer(data$ols_no_fixed_effects, #1
                            ),
           omit = c("Constant"),
           omit.stat = c("rsq", "ser", "F"),
+          star.cutoffs = c(1e-8, 1e-8, 1e-8), # make star cutoff so low they go away
           notes        = "Sometimes you just have to start over.",
           notes.append = FALSE,
           notes.align = "l",
@@ -82,7 +83,7 @@ stargazer(data$ols_no_fixed_effects, #1
           digits = 3,
           font.size = "scriptsize",
           style = "apsr",
-          table.layout ="=lc-#-t-a-s=n",
+          table.layout ="-lc-#-t-a-s=n",
           no.space = TRUE,
           type = "latex",
           out = opt$out
