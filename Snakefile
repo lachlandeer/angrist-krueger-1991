@@ -37,11 +37,7 @@ rule paper:
         runner = config["src_lib"] + "knit_rmd.R",
         figures = expand(config["out_figures"] + "{iFigure}.pdf",
                         iFigure = FIGS),
-        ols_results = expand(config["out_analysis"] + "ols_{iFixedEffect}.Rds",
-                        iFixedEffect = FIXED_EFFECTS),
-        iv_no_fe = config["out_analysis"] + "iv_no_fe.Rds",
-        iv_fe = expand(config["out_analysis"] + "iv_{iInstrument}_fe.Rds",
-                        iInstrument = INST)
+        table = config["out_tables"] + "regression_table.tex"
     output:
         pdf = Path(config["out_paper"] + "paper.pdf")
     log:
@@ -53,6 +49,27 @@ rule paper:
 #
 # Construct Estimates Table
 #
+
+rule make_table:
+    input:
+        script = config["src_tables"] + "regression_table.R",
+        ols_results = expand(config["out_analysis"] + "ols_{iFixedEffect}.Rds",
+                        iFixedEffect = FIXED_EFFECTS),
+        iv_no_fe = config["out_analysis"] + "iv_no_fe.Rds",
+        iv_fe = expand(config["out_analysis"] + "iv_{iInstrument}_fe.Rds",
+                        iInstrument = INST),
+    output:
+        table = config["out_tables"] + "regression_table.tex",
+    params:
+        directory = "out/analysis"
+    log:
+        config["log"] + "tables/regression_table.Rout"
+    shell:
+        "Rscript {input.script} \
+            --filepath {params.directory} \
+            --out {output.table} \
+            > {log} 2>&1"
+
 
 #
 # Estimation Rules
