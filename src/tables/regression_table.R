@@ -76,7 +76,7 @@ stargazer(data$ols_no_fixed_effects, #1
           omit = c("Constant"),
           omit.stat = c("rsq", "ser", "F"),
           star.cutoffs = c(1e-8, 1e-8, 1e-8), # make star cutoff so low they go away
-          notes        = "Sometimes you just have to start over.",
+          notes        = "Notes: Robust Standard Errors in parentheses.",
           notes.append = FALSE,
           notes.align = "l",
           df = FALSE,
