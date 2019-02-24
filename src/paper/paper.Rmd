@@ -17,6 +17,15 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 ## Introduction
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas a risus vel lorem commodo luctus. Proin augue ex, sagittis venenatis ipsum in, accumsan dignissim felis. Nullam leo est, viverra at erat at, lacinia porta enim. Aenean facilisis lorem in nisl commodo malesuada. Suspendisse eu egestas metus. In quis tristique magna. Cras in erat vel dui auctor sodales non sit amet urna. Vivamus vel erat massa. Maecenas quis dignissim nibh, quis hendrerit est. Morbi in scelerisque elit, nec imperdiet nulla. Aenean ullamcorper vel lectus sed fermentum. Duis posuere, sem ut suscipit tincidunt, nisi magna elementum quam, ut feugiat odio turpis vel mauris.
+
+Aliquam erat volutpat. Phasellus fringilla congue porta. Aliquam erat volutpat. Cras eu laoreet eros. Aliquam gravida in mi vel volutpat. Curabitur et sagittis diam. Maecenas lectus enim, porttitor eget feugiat non, mattis vel nunc. Sed ut iaculis tortor. Aliquam condimentum gravida orci et pulvinar. Sed eget auctor nisl. Phasellus semper, nisi vel ullamcorper consequat, ex neque venenatis velit, eu gravida mi tellus vitae dolor. Nunc porttitor eleifend ante quis dictum. Maecenas vitae lacinia augue. Phasellus sed fermentum dolor. Sed ultricies erat eu sollicitudin congue. Vestibulum vitae lacus scelerisque, ornare nisi quis, semper nulla.
+
+Vestibulum ac varius elit. Sed tempus, diam vel mollis ornare, est ligula luctus dolor, at convallis nisl metus vel urna. Maecenas ut mattis nunc. Praesent sit amet lectus sed libero venenatis condimentum. Phasellus volutpat dolor in ex semper commodo. Praesent gravida neque facilisis, volutpat nisi vel, elementum enim. Praesent ornare volutpat turpis id malesuada.
+
+Donec eu libero ut orci sagittis posuere non ut leo. Duis et posuere arcu. Donec risus arcu, tincidunt at gravida sit amet, posuere eget dui. Etiam pulvinar dolor mauris, quis tincidunt leo ultricies at. Praesent luctus aliquam pharetra. Curabitur faucibus efficitur pellentesque. Quisque non neque porta, cursus lectus eget, pretium sapien. Phasellus eget sollicitudin nisi, et euismod mauris. Etiam luctus nulla nec sapien laoreet eleifend at in dui.
+
+Suspendisse ac dignissim quam, id rhoncus sem. In sit amet suscipit ligula. Aliquam erat volutpat. Phasellus et lacinia nunc. Praesent id enim ultricies, tristique enim sed, eleifend orci. Praesent fermentum nec quam sed dignissim. Sed ornare mattis placerat. Ut lacinia maximus metus ac aliquam. Curabitur facilisis, erat a vulputate pretium, neque quam dapibus enim, eget facilisis quam odio nec urna. Donec nec pharetra leo. Nullam varius purus in ipsum fringilla semper. Maecenas ante enim, facilisis consectetur est id, rhoncus varius eros. Donec sit amet odio a tortor euismod faucibus eget vel ipsum. Sed fringilla est at sapien rhoncus, sit amet mattis augue consequat. Nullam nec commodo nunc.
 
 ## Summary Plots
 
@@ -25,6 +34,20 @@ knitr::include_graphics( c("../../out/figures/education_by_cohort.pdf",
                             "../../out/figures/earnings_by_cohort.pdf"))
 ```
 
+Donec eu libero ut orci sagittis posuere non ut leo. Duis et posuere arcu. Donec risus arcu, tincidunt at gravida sit amet, posuere eget dui. Etiam pulvinar dolor mauris, quis tincidunt leo ultricies at. Praesent luctus aliquam pharetra. Curabitur faucibus efficitur pellentesque. Quisque non neque porta, cursus lectus eget, pretium sapien. Phasellus eget sollicitudin nisi, et euismod mauris. Etiam luctus nulla nec sapien laoreet eleifend at in dui.
+
+Suspendisse ac dignissim quam, id rhoncus sem. In sit amet suscipit ligula. Aliquam erat volutpat. Phasellus et lacinia nunc. Praesent id enim ultricies, tristique enim sed, eleifend orci. Praesent fermentum nec quam sed dignissim. Sed ornare mattis placerat. Ut lacinia maximus metus ac aliquam. Curabitur facilisis, erat a vulputate pretium, neque quam dapibus enim, eget facilisis quam odio nec urna. Donec nec pharetra leo. Nullam varius purus in ipsum fringilla semper. Maecenas ante enim, facilisis consectetur est id, rhoncus varius eros. Donec sit amet odio a tortor euismod faucibus eget vel ipsum. Sed fringilla est at sapien rhoncus, sit amet mattis augue consequat. Nullam nec commodo nunc.
+
 ## Regression Table
 
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas a risus vel lorem commodo luctus. Proin augue ex, sagittis venenatis ipsum in, accumsan dignissim felis. Nullam leo est, viverra at erat at, lacinia porta enim. Aenean facilisis lorem in nisl commodo malesuada. Suspendisse eu egestas metus. In quis tristique magna. Cras in erat vel dui auctor sodales non sit amet urna. Vivamus vel erat massa. Maecenas quis dignissim nibh, quis hendrerit est. Morbi in scelerisque elit, nec imperdiet nulla. Aenean ullamcorper vel lectus sed fermentum. Duis posuere, sem ut suscipit tincidunt, nisi magna elementum quam, ut feugiat odio turpis vel mauris.
+
+Aliquam erat volutpat. Phasellus fringilla congue porta. Aliquam erat volutpat. Cras eu laoreet eros. Aliquam gravida in mi vel volutpat. Curabitur et sagittis diam. Maecenas lectus enim, porttitor eget feugiat non, mattis vel nunc. Sed ut iaculis tortor. Aliquam condimentum gravida orci et pulvinar. Sed eget auctor nisl. Phasellus semper, nisi vel ullamcorper consequat, ex neque venenatis velit, eu gravida mi tellus vitae dolor. Nunc porttitor eleifend ante quis dictum. Maecenas vitae lacinia augue. Phasellus sed fermentum dolor. Sed ultricies erat eu sollicitudin congue. Vestibulum vitae lacus scelerisque, ornare nisi quis, semper nulla.
+
+Vestibulum ac varius elit. Sed tempus, diam vel mollis ornare, est ligula luctus dolor, at convallis nisl metus vel urna. Maecenas ut mattis nunc. Praesent sit amet lectus sed libero venenatis condimentum. Phasellus volutpat dolor in ex semper commodo. Praesent gravida neque facilisis, volutpat nisi vel, elementum enim. Praesent ornare volutpat turpis id malesuada.
+
 \input{../../out/tables/regression_table.tex}
+
+Donec eu libero ut orci sagittis posuere non ut leo. Duis et posuere arcu. Donec risus arcu, tincidunt at gravida sit amet, posuere eget dui. Etiam pulvinar dolor mauris, quis tincidunt leo ultricies at. Praesent luctus aliquam pharetra. Curabitur faucibus efficitur pellentesque. Quisque non neque porta, cursus lectus eget, pretium sapien. Phasellus eget sollicitudin nisi, et euismod mauris. Etiam luctus nulla nec sapien laoreet eleifend at in dui.
+
+Suspendisse ac dignissim quam, id rhoncus sem. In sit amet suscipit ligula. Aliquam erat volutpat. Phasellus et lacinia nunc. Praesent id enim ultricies, tristique enim sed, eleifend orci. Praesent fermentum nec quam sed dignissim. Sed ornare mattis placerat. Ut lacinia maximus metus ac aliquam. Curabitur facilisis, erat a vulputate pretium, neque quam dapibus enim, eget facilisis quam odio nec urna. Donec nec pharetra leo. Nullam varius purus in ipsum fringilla semper. Maecenas ante enim, facilisis consectetur est id, rhoncus varius eros. Donec sit amet odio a tortor euismod faucibus eget vel ipsum. Sed fringilla est at sapien rhoncus, sit amet mattis augue consequat. Nullam nec commodo nunc.
