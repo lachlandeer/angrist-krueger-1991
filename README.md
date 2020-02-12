@@ -59,6 +59,14 @@ You can install snakemake as follows:
     conda install datrie
     ```
 
+## Visualizing the Workflow
+
+There are three interesting visualizations of the snakemake DAG:
+
+1. `$ snakemake --dag | dot -Tpdf > dag.pdf`
+2. `$ snakemake --rulegraph | dot -Tpdf > rulegraph.pdf`
+3. `$ snakemake --filegraph | dot -Tpdf > filegraph.pdf`
+
 ## Suggested Citation:
 
-Deer, Lachlan, 2019. "Replication of Angrist and Krueger (1991) : Table 4.1.1 and Figure 4.1.1 from Mostly Harmless Econometrics.
+Deer, Lachlan, 2020. "Replication of Angrist and Krueger (1991) with Snakemake : Table 4.1.1 and Figure 4.1.1 from Mostly Harmless Econometrics.
