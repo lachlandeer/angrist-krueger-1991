@@ -1,0 +1,51 @@
+---
+title: "Partial Replication of Angrist and Krueger (1991)"
+subtitle: "Workflow Management with Snakemake"
+author:
+  - "Lachlan Deer$^1$"
+institute:
+   - $^1$Chicago Booth School of Business
+date: "`r Sys.Date()`"
+header-includes:
+   - \usepackage{bbm}
+   - \usepackage{subfig}
+   - \usepackage{dcolumn}
+   - \usepackage{amsthm}
+   - \usepackage{amsmath}
+output:
+  beamer_presentation:
+    latex_engine: xelatex
+    theme: "default"
+    colortheme: "default"
+    fonttheme: "default"
+    slide_level: 2
+    keep_tex: true
+---
+
+## Motivation
+
+* Understanding & implementing workflows is hard
+* We provide a guide to one alternative, 'Snakemake'
+
+* Practical Example: Replicating Angrist and Krueger's 1991 paper that uses quarter of birth as an instrument for education
+
+## Another slide
+
+* Bullets
+    - Sub bullets
+    - *italic*
+    - **bold**
+
+1. Numbered Lists ...
+2. Can go like this
+
+## Motivating Evidence of First Stage Regression
+
+```{r fig-sub, fig.align="center", echo = FALSE, fig.cap = 'Graphical depiction of first stage and reduced form for IV estimates of the economic return to schooling using quarter of birth', fig.subcap = c('Subcaption1', 'Subcaption2'), fig.show = "hold", out.width = '.50\\linewidth', fig.asp = 1, fig.ncol = 2}
+knitr::include_graphics( c("../../out/figures/education_by_cohort.pdf",
+                            "../../out/figures/earnings_by_cohort.pdf"))
+```
+
+## Regression Results
+
+\input{../../out/tables/regression_table.tex}
