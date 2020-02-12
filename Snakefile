@@ -20,15 +20,36 @@ FIXED_EFFECTS = ["fixed_effects", "no_fixed_effects"]
 ## all                : moves pdf to root, builds project if missing dependency
 rule all:
     input:
-        paper = config["out_paper"] + "paper.pdf",
+        paper  = config["out_paper"] + "paper.pdf",
+        slides = config["out_slides"] + "slides.pdf"
     output:
-        paper = Path("pp4rs_assignment.pdf")
+        paper  = Path("pp4rs_assignment_paper.pdf"),
+        slides = "pp4rs_assignment_slides.pdf"
     shell:
-        "rm -f Rplots.pdf && cp {input.paper} {output.paper}"
+        "rm -f Rplots.pdf && \
+            cp {input.paper} {output.paper} && \
+                cp {input.slides} {output.slides}"
 
 #
-# Builds Paper
+# Builds Paper & Slides
 #
+
+## slides             : builds Rmd to pdf
+# Note: this uses a simpler command line parsing strategy
+rule slides:
+    input:
+        slides = config["src_slides"] + "slides.Rmd",
+        runner = config["src_lib"] + "knit_rmd.R",
+        figures = expand(config["out_figures"] + "{iFigure}.pdf",
+                        iFigure = FIGS),
+        table = config["out_tables"] + "regression_table.tex"
+    output:
+        pdf = Path(config["out_slides"] + "slides.pdf")
+    log:
+        config["log"] + "slides/slides.Rout"
+    shell:
+        "Rscript {input.runner} {input.slides} {output.pdf} \
+            > {log} 2>&1"
 
 ## paper              : builds Rmd to pdf
 # Note: this uses a simpler command line parsing strategy
