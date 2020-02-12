@@ -4,7 +4,8 @@
  authors: @lachlandeer
 
  all                : moves pdf to root, builds project if missing dependency
- paper              : builds Rmd to pdf
+ slides             : builds a rmarkdown slide set to pdf
+ paper              : builds rmarkdown paper to pdf
  make_table         : construct regression table
  run_iv_fe          : estimate IV regression equations that have Fixed Effects
  create_figure      : constructs summary figures
