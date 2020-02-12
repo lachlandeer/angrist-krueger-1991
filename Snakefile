@@ -4,8 +4,6 @@
 ## authors: @lachlandeer
 ##
 
-from pathlib import Path
-
 # --- Importing Configuration Files --- #
 
 configfile: "config.yaml"
@@ -23,7 +21,7 @@ rule all:
         paper  = config["out_paper"] + "paper.pdf",
         slides = config["out_slides"] + "slides.pdf"
     output:
-        paper  = Path("pp4rs_assignment_paper.pdf"),
+        paper  = "pp4rs_assignment_paper.pdf",
         slides = "pp4rs_assignment_slides.pdf"
     shell:
         "rm -f Rplots.pdf && \
@@ -44,7 +42,7 @@ rule slides:
                         iFigure = FIGS),
         table = config["out_tables"] + "regression_table.tex"
     output:
-        pdf = Path(config["out_slides"] + "slides.pdf")
+        pdf = config["out_slides"] + "slides.pdf"
     log:
         config["log"] + "slides/slides.Rout"
     shell:
@@ -61,7 +59,7 @@ rule paper:
                         iFigure = FIGS),
         table = config["out_tables"] + "regression_table.tex"
     output:
-        pdf = Path(config["out_paper"] + "paper.pdf")
+        pdf = config["out_paper"] + "paper.pdf"
     log:
         config["log"] + "paper/paper.Rout"
     shell:
@@ -81,7 +79,7 @@ rule make_table:
                         iInstrument = INST,
                         iFixedEffect = FIXED_EFFECTS),
     output:
-        table = Path(config["out_tables"] + "regression_table.tex"),
+        table = config["out_tables"] + "regression_table.tex",
     params:
         directory = "out/analysis"
     log:
@@ -106,7 +104,7 @@ rule run_iv_fe:
         fe       = config["src_model_specs"] + "{iFixedEffect}.json",
         instr    = config["src_model_specs"] + "instrument_{iInstrument}.json",
     output:
-        Path(config["out_analysis"] + "iv_{iInstrument}.{iFixedEffect}.Rds")
+        config["out_analysis"] + "iv_{iInstrument}.{iFixedEffect}.Rds"
     log:
         config["log"] + "analysis/iv_{iInstrument}.{iFixedEffect}.Rout"
     shell:
@@ -126,7 +124,7 @@ rule run_ols:
         equation = config["src_model_specs"] + "estimating_equation.json",
         fe       = config["src_model_specs"] + "{iFixedEffect}.json",
     output:
-        Path(config["out_analysis"] + "ols_{iFixedEffect}.Rds")
+        config["out_analysis"] + "ols_{iFixedEffect}.Rds"
     log:
         config["log"] + "analysis/ols_{iFixedEffect}.Rout"
     shell:
@@ -146,7 +144,7 @@ rule create_figure:
         script = config["src_figures"] + "{iFigure}.R",
         data   = config["out_data"] + "cohort_summary.csv",
     output:
-        pdf = Path(config["out_figures"] + "{iFigure}.pdf"),
+        pdf = config["out_figures"] + "{iFigure}.pdf",
     log:
         config["log"] + "figures/{iFigure}.Rout"
     shell:
@@ -165,7 +163,7 @@ rule gen_cohort_sum:
         script = config["src_data_mgt"] + "cohort_summary.R",
         data   = config["out_data"] + "angrist_krueger.csv",
     output:
-        data = Path(config["out_data"] + "cohort_summary.csv"),
+        data = config["out_data"] + "cohort_summary.csv",
     log:
         config["log"] + "data-mgt/cohort_summary.Rout"
     shell:
@@ -180,7 +178,7 @@ rule gen_reg_vars:
         script      = config["src_data_mgt"] + "gen_reg_vars.R",
         zip_archive = config["src_data"] + "angrist_krueger_1991.zip"
     output:
-        data = Path(config["out_data"] + "angrist_krueger.csv")
+        data = config["out_data"] + "angrist_krueger.csv"
     log:
         config["log"] + "data-mgt/gen_reg_vars.Rout"
     shell:
@@ -194,7 +192,7 @@ rule download_data:
     input:
         script = config["src_data_mgt"] + "download_data.R",
     output:
-        data = Path(config["src_data"] + "angrist_krueger_1991.zip"),
+        data = config["src_data"] + "angrist_krueger_1991.zip",
     params:
         url = "http://economics.mit.edu/files/397",
     log:
