@@ -34,7 +34,7 @@ rule all:
 # Builds Paper & Slides
 #
 
-## slides             : builds Rmd to pdf
+## slides             : builds a rmarkdown slide set to pdf
 # Note: this uses a simpler command line parsing strategy
 rule slides:
     input:
@@ -51,7 +51,7 @@ rule slides:
         "Rscript {input.runner} {input.slides} {output.pdf} \
             > {log} 2>&1"
 
-## paper              : builds Rmd to pdf
+## paper              : builds rmarkdown paper to pdf
 # Note: this uses a simpler command line parsing strategy
 rule paper:
     input:
