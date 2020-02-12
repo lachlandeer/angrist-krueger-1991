@@ -59,6 +59,17 @@ You can install snakemake as follows:
     conda install datrie
     ```
 
+### Installing LaTeX
+
+You will likely need an installation of LaTeX on your machine to build the slides.
+The instructions are operating system specific, but for Ubuntu/Debian based systems:
+
+```
+sudo apt-get install texlive-extra
+```
+
+should install it via the terminal.
+
 ## Visualizing the Workflow
 
 There are three interesting visualizations of the snakemake DAG:
