@@ -271,3 +271,15 @@ rule rulegraph:
         "rulegraph.pdf"
     shell:
         "snakemake --rulegraph | dot -Tpdf > {output}"
+
+# --- INSTALL GRAPHVIZ --- #
+
+## install_graphviz   : install necessary packages to visualize Snakemake workflow 
+rule graphviz:
+    shell:
+        "sudo apt-get install graphviz"
+
+## install_graphviz_mac : install necessary packages to visualize Snakemake workflow on a mac 
+rule graphviz_mac:
+    shell:
+        "brew install graphviz"
