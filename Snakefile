@@ -220,6 +220,13 @@ rule install_packages:
     shell:
         "Rscript {input.script}"
 
+## install_rmd        : install packages to build rmarkdown docs to pdf
+rule install_rmd:
+    input:
+        script = config["src_lib"] + "install_rmarkdown.R",
+    shell:
+        "Rscript {input.script}"
+
 # --- Clean Rules --- #
 ## clean              : removes all content from out/ directory
 rule clean:
