@@ -228,7 +228,7 @@ rule install_rmd:
         "Rscript {input.script}"
 
 ## install_tinytex     : install small latex distribution to build pdfs
-rule install_rmd:
+rule install_tinytex:
     input:
         script = config["src_lib"] + "install_tinytex.R",
     shell:
