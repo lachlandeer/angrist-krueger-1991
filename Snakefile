@@ -227,6 +227,13 @@ rule install_rmd:
     shell:
         "Rscript {input.script}"
 
+## install_tinytex     : install small latex distribution to build pdfs
+rule install_rmd:
+    input:
+        script = config["src_lib"] + "install_tinytex.R",
+    shell:
+        "Rscript {input.script}"
+
 # --- Clean Rules --- #
 ## clean              : removes all content from out/ directory
 rule clean:
