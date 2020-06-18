@@ -27,7 +27,7 @@ before_install:
     - sudo apt-key adv --keyserver keys.gnupg.net --recv-key 'E19F5F87128899B192B1A2C2AD5F960A256A04AF'
     - sudo apt-get update
     - sudo apt install --allow-unauthenticated r-base r-base-dev
-    - pip3 --no-cache-dir install -r -r python-requirements.txt
+    - pip3 --no-cache-dir install -r python-requirements.txt
 
 install:
     - snakemake --cores 1 install_packages
