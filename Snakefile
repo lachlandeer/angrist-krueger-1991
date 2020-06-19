@@ -223,7 +223,7 @@ rule install_packages:
 ## install_rmd        : install packages to build rmarkdown docs to pdf
 rule install_rmd:
     input:
-        script = config["src_lib"] + "install_rmarkdown.R",
+        script = config["src_lib"] + "install_rmd.R",
     shell:
         "sudo Rscript {input.script}"
 
