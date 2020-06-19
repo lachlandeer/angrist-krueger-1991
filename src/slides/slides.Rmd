@@ -10,8 +10,8 @@ header-includes:
    - \usepackage{bbm}
    - \usepackage{subfig}
    - \usepackage{dcolumn}
-   - \usepackage{amsthm}
-   - \usepackage{amsmath}
+  #  - \usepackage{amsthm}
+  #  - \usepackage{amsmath}
 output:
   beamer_presentation:
     latex_engine: xelatex
