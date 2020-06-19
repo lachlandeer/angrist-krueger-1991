@@ -20,7 +20,7 @@ addons:
 
 cache:
     directories:
-    - $HOME/R/Library
+    - /usr/local/lib/R/site-library/
 
 before_install:
     - sudo add-apt-repository "deb https://cloud.r-project.org/bin/linux/ubuntu xenial-cran35/"
