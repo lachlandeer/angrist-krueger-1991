@@ -43,14 +43,13 @@ rule slides:
         table = config["out_tables"] + "regression_table.tex"
     output:
         pdf = config["out_slides"] + "slides.pdf"
-    log:
-        config["log"] + "slides/slides.Rout"
+    # log:
+    #     config["log"] + "slides/slides.Rout"
     shell:
-        "Rscript {input.runner} {input.slides} {output.pdf} \
-            > {log} 2>&1"
+        "Rscript {input.runner} {input.slides} {output.pdf}"
 
 ## paper              : builds rmarkdown paper to pdf
-# Note: this uses a simpler command line parsing strategy
+# Note: this uses a simple command line parsing strategy
 rule paper:
     input:
         paper = config["src_paper"] + "paper.Rmd",
@@ -60,11 +59,10 @@ rule paper:
         table = config["out_tables"] + "regression_table.tex"
     output:
         pdf = config["out_paper"] + "paper.pdf"
-    log:
-        config["log"] + "paper/paper.Rout"
+    # log:
+    #     config["log"] + "paper/paper.Rout"
     shell:
-        "Rscript {input.runner} {input.paper} {output.pdf} \
-            > {log} 2>&1"
+        "Rscript {input.runner} {input.paper} {output.pdf}"
 
 #
 # Construct Estimates Table
