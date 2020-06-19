@@ -218,21 +218,21 @@ rule install_packages:
         script = config["src_lib"] + "install_r_packages.R",
         requirements = "REQUIREMENTS.txt"
     shell:
-        "Rscript {input.script}"
+        "sudo Rscript {input.script}"
 
 ## install_rmd        : install packages to build rmarkdown docs to pdf
 rule install_rmd:
     input:
         script = config["src_lib"] + "install_rmarkdown.R",
     shell:
-        "Rscript {input.script}"
+        "sudo Rscript {input.script}"
 
 ## install_tinytex     : install small latex distribution to build pdfs
 rule install_tinytex:
     input:
         script = config["src_lib"] + "install_tinytex.R",
     shell:
-        "Rscript {input.script}"
+        "sudo Rscript {input.script}"
 
 # --- Clean Rules --- #
 ## clean              : removes all content from out/ directory
