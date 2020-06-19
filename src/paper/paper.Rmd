@@ -1,7 +1,7 @@
 ---
 title: "Replication of Angrist and Krueger (1991)"
 subtitle: "Table 4.1.1 from Mostly Harmless Econometrics"
-author: 'Lachlan Deer'
+author: "Lachlan Deer"
 date: `r format(Sys.time(), "%d %B, %Y")`
 header-includes:
    - \usepackage{bbm}
