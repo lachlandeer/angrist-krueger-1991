@@ -33,6 +33,7 @@ install:
     - snakemake --cores 1 install_packages
     - snakemake --cores 1 install_rmd
     - snakemake --cores 1 install_tinytex
+    - sudo chown -R `whoami`:admin /home/travis/.TinyTeX/
 
 script:
     "snakemake --cores 1 all"
