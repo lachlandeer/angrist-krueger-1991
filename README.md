@@ -1,5 +1,9 @@
 # Replicate MHE Table 4.1.1 and Figure 4.1.1
 
+[![Build Status](https://travis-ci.org/lachlandeer/angrist-krueger-1991.svg?branch=master)](https://travis-ci.org/lachlandeer/angrist-krueger-1991)
+[![lifecycle](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
+[![lifecycle](https://img.shields.io/badge/version-0.2-red.svg)]()
+
 ## What this repo does
 
 We replicate Table 4.1.1 and Figure 4.1.1 from Mostly Harmless Econometrics using a reproducible research workflow.
@@ -59,24 +63,38 @@ You can install snakemake as follows:
     conda install datrie
     ```
 
-### Installing LaTeX
+### Installing pandoc and LaTeX
 
-You will likely need an installation of LaTeX on your machine to build the slides.
-The instructions are operating system specific, but for Ubuntu/Debian based systems:
+Because we want to generate pdf outputs we need two additional bits of software to make that happen:
 
-```
-sudo apt-get install texlive-extra
-```
+* If you do not have RStudio installed, you will have to install Pandoc (http://pandoc.org)
+* If you do not have LaTeX installed, we recommend that you install TinyTeX (https://yihui.name/tinytex/)
+  * TinyTeX is a lightweight, portable, cross-platform, and easy-to-maintain LaTeX distribution.
+  - From inside R:
+    ```{r}
+    install.packages('tinytex')
+    tinytex::install_tinytex()  # install TinyTeX
+    ```
 
-should install it via the terminal.
+## Visualization of the Workflow
 
-## Visualizing the Workflow
+Snakemake workflows are a directed acyclic graph (DAG).
+We can visualize the relationship between the rules (a simplified view of the DAG) in our workflow:
 
-There are three interesting visualizations of the snakemake DAG:
+![Rulegraph for MRW Workflow](./rulegraph.png)
 
-1. `$ snakemake --dag | dot -Tpdf > dag.pdf`
-2. `$ snakemake --rulegraph | dot -Tpdf > rulegraph.pdf`
-3. `$ snakemake --filegraph | dot -Tpdf > filegraph.pdf`
+Check out the rules in for various visualizations of the workflow near the bottom of the `Snakefile` in the 'Snakemake Workflow graphs'. 
+You will need to install `graphviz` to run these rules - we have included a rule inside `dag.smk` to install this for you. 
+
+## Updates to Workflow Example
+
+Periodic updates the workflow occur as I find better/simpler ways to do things and as my opinions on best practice evolve.
+Major changes are tracked in the [NEWS file](./NEWS.md) with brief descriptions of the changes implemented.
+
+## Comments / Suggestions / Issues
+
+I'd love to hear your comments, suggestions or installation issues encountered when running the example.
+[Post an issue on Github.](https://github.com/lachlandeer/angrist-krueger-1991/issues)
 
 ## Suggested Citation:
 
