@@ -1,5 +1,8 @@
 # angrist-krueger-1991
 
+## Version 0.2.1 (2020/10/2)
+* Update snakemake version to 5.26.1
+
 ## Version 0.2.0 (2020/06/11)
 
 * Added Travis CI build to check project builds from start to finish
